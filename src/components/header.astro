@@ -1,0 +1,80 @@
+---
+import logoImage from '../assets/IdeaxTech-logo.png';
+---
+<header class="header">
+  <div class="logo">
+    <img src={logoImage.src} alt="IdeaxTech Logo" id="logo"/>
+  </div>
+  <nav class="nav">
+    <a href="/IdeaxTech_HP/about">団体紹介</a>
+    <a href="/IdeaxTech_HP/news">お知らせ</a>
+    <a href="/IdeaxTech_HP/">ホーム</a>
+    <button><a href="/IdeaxTech_HP/contact" class="contact">お問い合わせ</a></button>
+  </nav>
+</header>
+
+<style>
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  background-color: transparent;
+  margin-left: 40px;
+  align-items: center;
+}
+
+.logo img {
+  max-width: 140px;
+  height: auto;
+}
+
+.nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #333333;
+  margin: 0 15px;
+}
+
+.nav a:hover {
+  color: #000000;
+}
+
+.nav .contact {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0.5rem;
+  margin-right: 40px;
+  border-radius: 4px;
+}
+
+.nav .contact:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.nav button {
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 4px;
+}
+
+.nav button a {
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+.nav button a:hover {
+  text-decoration: none;
+}
+</style>
