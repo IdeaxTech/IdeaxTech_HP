@@ -3,13 +3,13 @@ import logoImage from '../assets/IdeaxTech-logo.png';
 ---
 <header class="header">
   <div class="logo">
-    <img src={logoImage.src} alt="IdeaxTech Logo" id="logo"/>
+    <img src={logoImage.src} alt="IdeaxTech Logo"/>
   </div>
   <nav class="nav">
-    <a href="/IdeaxTech_HP/about">団体紹介</a>
-    <a href="/IdeaxTech_HP/news">お知らせ</a>
-    <a href="/IdeaxTech_HP/">ホーム</a>
-    <button><a href="/IdeaxTech_HP/contact" class="contact">お問い合わせ</a></button>
+    <a href="/about">団体紹介</a>
+    <a href="/news">お知らせ</a>
+    <a href="/">ホーム</a>
+    <a href="/contact" class="contact">お問い合わせ</a>
   </nav>
 </header>
 
@@ -23,9 +23,7 @@ import logoImage from '../assets/IdeaxTech-logo.png';
 }
 
 .logo {
-  background-color: transparent;
   margin-left: 40px;
-  align-items: center;
 }
 
 .logo img {
@@ -35,13 +33,14 @@ import logoImage from '../assets/IdeaxTech-logo.png';
 
 .nav {
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
 }
 
 .nav a {
   text-decoration: none;
   color: #333333;
-  margin: 0 15px;
+  display: flex;
+  align-items: center;
 }
 
 .nav a:hover {
@@ -51,7 +50,7 @@ import logoImage from '../assets/IdeaxTech-logo.png';
 .nav .contact {
   background-color: #000000;
   color: #ffffff;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   margin-right: 40px;
   border-radius: 4px;
 }
@@ -59,22 +58,5 @@ import logoImage from '../assets/IdeaxTech-logo.png';
 .nav .contact:hover {
   background-color: #333333;
   color: #ffffff;
-}
-
-.nav button {
-  background: none;
-  border: none;
-  color: inherit;
-  padding: 0;
-  border-radius: 4px;
-}
-
-.nav button a {
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-}
-
-.nav button a:hover {
-  text-decoration: none;
 }
 </style>
