@@ -1,15 +1,15 @@
 ---
-import logoImage from '../assets/IdeaxTech-logo.png';
+import logoImage from '../assets/IdeaxTech-header-logo.svg';
 ---
 <header class="header">
   <div class="logo">
     <img src={logoImage.src} alt="IdeaxTech Logo"/>
   </div>
   <nav class="nav">
-    <a href="/about">団体紹介</a>
-    <a href="/news">お知らせ</a>
-    <a href="/">ホーム</a>
-    <a href="/contact" class="contact">お問い合わせ</a>
+    <a href="/about">About</a>
+    <a href="/activities">Activities</a>
+    <a href="/calendar">Calendar</a>
+    <a href="/contact" class="contact">Contact</a>
   </nav>
 </header>
 
@@ -19,21 +19,22 @@ import logoImage from '../assets/IdeaxTech-logo.png';
   justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
+  padding: 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-  margin-left: 40px;
+  margin-left: 15px;
 }
 
 .logo img {
-  max-width: 140px;
+  max-width: 80%;
   height: auto;
 }
 
 .nav {
   display: flex;
-  gap: 3rem;
+  gap: 2.5rem;
 }
 
 .nav a {
@@ -51,7 +52,7 @@ import logoImage from '../assets/IdeaxTech-logo.png';
   background-color: #000000;
   color: #ffffff;
   padding: 0.5rem 1rem;
-  margin-right: 40px;
+  margin-right: 20px;
   border-radius: 4px;
 }
 
