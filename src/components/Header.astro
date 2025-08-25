@@ -1,11 +1,13 @@
 ---
 import logoImage from '../assets/IdeaxTech-header-logo.svg';
+import '@fontsource-variable/unbounded';
 ---
+
 <header class="header">
   <div class="logo">
     <img src={logoImage.src} alt="IdeaxTech Logo"/>
   </div>
-  <nav class="nav">
+  <nav class="nav unbounded-semibold">
     <a href="/about">About</a>
     <a href="/activities">Activities</a>
     <a href="/calendar">Calendar</a>
@@ -35,6 +37,11 @@ import logoImage from '../assets/IdeaxTech-header-logo.svg';
 .nav {
   display: flex;
   gap: 2.5rem;
+}
+
+.unbounded-semibold {
+  font-family: 'Unbounded Variable', sans-serif;
+  font-weight: 600;
 }
 
 .nav a {
