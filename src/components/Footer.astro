@@ -25,10 +25,12 @@ import mailIcon from '../assets/mail.svg';
       </div>
     </div>
     <div class="footer-content-right">
-      <div class="footer-content-right-links">
-        <h5>Activities</h5>
-        <h5>Information</h5>
-      </div>
+      <nav class="footer-content-right-links">
+        <ul>
+          <li><a href="/activities">Activities</a></li>
+          <li><a href="/information">Information</a></li>
+        </ul>
+      </nav>
     </div>
   </div>
   <div class="footer-bottom">
@@ -90,7 +92,13 @@ import mailIcon from '../assets/mail.svg';
     text-align: right;
   }
 
-  .footer-content-right-links {
+  .footer-content-right-links ul {
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+    list-style: none;
+  }
+
+  .footer-content-right-links ul li a {
+    text-decoration: none;
     font-size: 24px;
     color: #000000;
   }
