@@ -1,0 +1,17 @@
+---
+import '@fontsource-variable/unbounded';
+const { title, color } = Astro.props;
+---
+<h2 class="title" style={color ? `color:${color}` : undefined}>#{title}</h2>
+
+<style>
+  .title {
+    font-family: 'Unbounded Variable', sans-serif;
+    font-weight: bold;
+    font-size: 64px;
+    margin-top: 32px;
+    margin-bottom: 64px;
+    margin-left: 120px;
+    line-height: 1.2;
+  }
+</style>
