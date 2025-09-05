@@ -1,17 +1,36 @@
 ---
-import '@fontsource-variable/unbounded';
-const { title, color } = Astro.props;
----
-<h2 class="title" style={color ? `color:${color}` : undefined}>#{title}</h2>
+/* titleでタイトルを指定、colorで色を指定（省略すると#333333になる） 
 
-<style>
+
+使用例:
+<Title title="Activities" color="#006655"/>
+
+#Activitiesのように表示される
+
+*/
+
+import '@fontsource-variable/unbounded';
+
+interface Props {
+  title: string;
+  color?: string;
+}
+
+const { title, color } = Astro.props as Props;
+const titleColor = color ? color : '#333333';
+---
+
+<h2 class="title">#{title}</h2>
+
+<style define:vars={{ titleColor }}>
   .title {
     font-family: 'Unbounded Variable', sans-serif;
-    font-weight: bold;
     font-size: 64px;
     margin-top: 32px;
     margin-bottom: 64px;
     margin-left: 120px;
-    line-height: 1.2;
+
+    /* デフォルトを適用済みの CSS 変数を使用 */
+    color: var(--titleColor);
   }
 </style>
