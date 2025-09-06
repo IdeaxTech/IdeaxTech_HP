@@ -1,0 +1,119 @@
+---
+import twitterIcon from '../assets/twitter.svg';
+import instagramIcon from '../assets/instagram.svg';
+import mailIcon from '../assets/mail.svg';
+---
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap"
+  rel="stylesheet"
+/>
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-content-left">
+      <div class="footer-content-left-social">
+          <h2 class="footer-content-left-title unbounded-300">Social</h2>
+          <div class="footer-content-left-links">
+          <a href="#">
+            <img src={twitterIcon.src} alt="Twitter Icon" /> Twitter</a
+          >
+          <a href="#">
+            <img src={instagramIcon.src} alt="Instagram Icon" /> Instagram</a
+          >
+          <a href="#"> <img src={mailIcon.src} alt="Mail Icon" /> Mail</a>
+      </div>
+      </div>
+    </div>
+    <div class="footer-content-right">
+      <nav class="footer-content-right-links">
+        <ul>
+          <li><a href="/activities">Activities</a></li>
+          <li><a href="/information">Information</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© Copyright</p>
+  </div>
+</footer>
+
+<style>
+  .unbounded-300 {
+    font-family: 'Unbounded', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  .footer {
+    background-color: #fdfdfc;
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 120px;
+  }
+
+  .footer-content-left {
+    flex: 1;
+    text-align: left;
+  }
+
+  .footer-content-left-social {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-content-left-title {
+    font-size: 64px;
+  }
+
+  .footer-content-left-links {
+    display: flex;
+    flex-direction: row;
+    color: #000000;
+  }
+
+  .footer-content-left-links a {
+    text-decoration: none;
+    margin-right: 20px;
+    color: #6f6f70;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer-content-left-links a img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .footer-content-right {
+    flex: 1;
+    text-align: right;
+  }
+
+  .footer-content-right-links ul {
+    font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
+    list-style: none;
+  }
+
+  .footer-content-right-links ul li a {
+    text-decoration: none;
+    font-size: 24px;
+    color: #000000;
+  }
+
+  .footer-bottom {
+    padding: 1px;
+    background-color: #e7e6e7;
+    text-align: center;
+  }
+</style>.
