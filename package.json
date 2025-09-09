@@ -10,6 +10,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@fontsource-variable/unbounded": "^5.2.6",
     "astro": "^5.8.2"
   },
   "devDependencies": {
