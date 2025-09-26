@@ -22,7 +22,7 @@ const { img, title, text } = Astro.props;
   .example-card {
     border: 1px solid #000;
     border-radius: 6px;
-    padding: 2.0rem;
+    padding: 2rem;
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -36,8 +36,9 @@ const { img, title, text } = Astro.props;
   }
 
   .example-card-image-wrapper {
-    width: 300px;
-    height: 300px;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 300px;
     border-radius: 20px;
     overflow: hidden;
     background: #eee;
@@ -50,7 +51,8 @@ const { img, title, text } = Astro.props;
   }
 
   .example-card-content {
-    width: 310px;             
+    width: 100%;
+    max-width: 310px;
     text-align: left;
   }
 
@@ -62,8 +64,8 @@ const { img, title, text } = Astro.props;
   }
 
   .example-card-text {
-    margin: 1.0;
-    font-size: 1.0rem;
+    margin: 1rem 0;
+    font-size: 1rem;
     font-weight: 500;
     color: #ff3399;
     line-height: 1.6;
