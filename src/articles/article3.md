@@ -1,0 +1,10 @@
+---
+layout: ../layouts/PostLayout.astro
+category: "article-category3"
+date: "2025/08/11"
+title: "記事タイトルがここに入ります。################################################################はみ出るくらい長い記事タイトルになります。"
+url: /articles/article3/
+---
+
+#### こちらは記事3の本文です。
+This is the body of article 3.
