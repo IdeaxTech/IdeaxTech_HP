@@ -1,32 +1,38 @@
 ---
+import Title from './Title.astro';
 import ArticleCategory from './ArticleCategory.astro';
 import '@fontsource-variable/unbounded';
-export interface Article {
-  href: string;
-  category: string;
-  datetime: string;
-  title: string;
+interface Article {
+  url: string;
+    frontmatter: {
+    category: string;
+    date: string;
+    title: string;
+    layout: string;
+  };
 }
 interface Props {
-  articles: Article[];
+  articles?: Article[];
 }
-const { articles } = Astro.props;
+const { articles: propsArticles } = Astro.props as Props;
+const articles = propsArticles || await Astro.glob('../articles/*.md') as Article[];
 ---
 
 <section class="article">
-    <header class="article-header">
+    <div class="article-header">
+        <Title title="Information" color="#88d498"/>
         <a href="#" class="view-more unbounded-regular">View More →</a>
-    </header>
+    </div>
 
     <ul class="article-list">
-        {articles.map(article => (
+        {articles.map((article) => (
         <li class="article-item">
-            <a href={article.href}>
+            <a href={article.url}>
                 <div class="article-meta">
-                    <ArticleCategory category={article.category} />
-                    <time class="article-date unbounded-bold" datetime={article.datetime}>{article.datetime.substring(0, 10).replace(/-/g, '.')}</time>
+                    <ArticleCategory category={article.frontmatter.category} />
+                    <time class="article-date unbounded-bold" datetime={article.frontmatter.date}>{article.frontmatter.date}</time>
                 </div>
-                <p class="article-title">{article.title}</p>
+                <p class="article-title">{article.frontmatter.title}</p>
             </a>
         </li>
         ))}
