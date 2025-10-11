@@ -3,40 +3,48 @@ import Title from './Title.astro';
 import ArticleCategory from './ArticleCategory.astro';
 import '@fontsource-variable/unbounded';
 interface Article {
-  url: string;
-    frontmatter: {
-    category: string;
-    date: string;
-    title: string;
-    layout: string;
-  };
+	url: string;
+	frontmatter: {
+		category: string;
+		date: string;
+		title: string;
+		layout: string;
+	};
 }
 interface Props {
-  articles: Article[];
+	articles: Article[];
 }
 const { articles: propsArticles } = Astro.props;
-const articles = propsArticles || await Astro.glob('../articles/*.md') as Article[];
+const articles =
+	propsArticles || ((await Astro.glob('../articles/*.md')) as Article[]);
 ---
 
 <section class="article">
-    <div class="article-header">
-        <Title title="Information" color="#88d498"/>
-        <a href="#" class="view-more unbounded-regular">View More →</a>
-    </div>
+	<div class="article-header">
+		<Title title="Information" color="#88d498" />
+		<a href="#" class="view-more unbounded-regular">View More →</a>
+	</div>
 
-    <ul class="article-list">
-        {articles.map((article) => (
-        <li class="article-item">
-            <a href={article.url}>
-                <div class="article-meta">
-                    <ArticleCategory category={article.frontmatter.category} />
-                    <time class="article-date unbounded-bold" datetime={article.frontmatter.date}>{article.frontmatter.date}</time>
-                </div>
-                <p class="article-title">{article.frontmatter.title}</p>
-            </a>
-        </li>
-        ))}
-    </ul>
+	<ul class="article-list">
+		{
+			articles.map((article) => (
+				<li class="article-item">
+					<a href={article.url}>
+						<div class="article-meta">
+							<ArticleCategory category={article.frontmatter.category} />
+							<time
+								class="article-date unbounded-bold"
+								datetime={article.frontmatter.date}
+							>
+								{article.frontmatter.date}
+							</time>
+						</div>
+						<p class="article-title">{article.frontmatter.title}</p>
+					</a>
+				</li>
+			))
+		}
+	</ul>
 </section>
 
 <style>
@@ -133,5 +141,6 @@ const articles = propsArticles || await Astro.glob('../articles/*.md') as Articl
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
 	}
 </style>

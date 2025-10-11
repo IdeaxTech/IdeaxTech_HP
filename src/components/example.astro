@@ -2,13 +2,6 @@
 const { img, title, text } = Astro.props;
 ---
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap"
-	rel="stylesheet"
-/>
-
 <div class="example-card">
 	<div class="example-card-inner">
 		<div class="example-card-image-wrapper">
@@ -64,6 +57,7 @@ const { img, title, text } = Astro.props;
 		font-size: 1.8rem;
 		font-weight: 700;
 		color: #ff3399;
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
 	}
 
 	.example-card-text {
@@ -72,5 +66,6 @@ const { img, title, text } = Astro.props;
 		font-weight: 500;
 		color: #ff3399;
 		line-height: 1.6;
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
 	}
 </style>
