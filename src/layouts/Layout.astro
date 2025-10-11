@@ -11,8 +11,9 @@ import '@fontsource-variable/unbounded';
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
 
-
-		<script dangerouslySetInnerHTML={{ __html: `
+		<script
+			dangerouslySetInnerHTML={{
+				__html: `
       (function(d) {
         const config = {
           kitId: 'ktj3cmj',
@@ -41,9 +42,8 @@ import '@fontsource-variable/unbounded';
       };
       s.parentNode.insertBefore(tk, s);
       })(document);
-      ` }} />
-
-
+      `,
+			}}></script>
 	</head>
 	<body>
 		<slot />
