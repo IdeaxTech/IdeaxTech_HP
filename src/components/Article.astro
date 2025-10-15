@@ -3,12 +3,11 @@ import Title from './Title.astro';
 import ArticleCategory from './ArticleCategory.astro';
 import '@fontsource-variable/unbounded';
 interface Article {
-  url: string;
     frontmatter: {
     category: string;
     date: string;
     title: string;
-    layout: string;
+    url: string;
   };
 }
 interface Props {
@@ -29,7 +28,7 @@ const additionalArticles = allArticles.slice(4);
     <ul class="article-list">
         {initialArticles.map((article) => (
         <li class="article-item">
-            <a href={article.url}>
+            <a href={article.frontmatter.url}>
                 <div class="article-meta">
                     <ArticleCategory category={article.frontmatter.category} />
                     <time class="article-date unbounded-bold" datetime={article.frontmatter.date}>{article.frontmatter.date.substring(0, 10).replace(/[-/]/g, '.')}</time>
