@@ -3,198 +3,229 @@ import Title from './Title.astro';
 import ArticleCategory from './ArticleCategory.astro';
 import '@fontsource-variable/unbounded';
 interface Article {
-    frontmatter: {
-    category: string;
-    date: string;
-    title: string;
-    url: string;
-  };
+	frontmatter: {
+		category: string;
+		date: string;
+		title: string;
+		url: string;
+	};
 }
 interface Props {
-    articles: Article[];
+	articles: Article[];
 }
 const { articles: propsArticles } = Astro.props;
-const allArticles = propsArticles || (await Astro.glob('../articles/*.md') as Article[]).sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+const allArticles =
+	propsArticles ||
+	((await Astro.glob('../articles/*.md')) as Article[]).sort(
+		(a, b) =>
+			new Date(b.frontmatter.date).getTime() -
+			new Date(a.frontmatter.date).getTime(),
+	);
 const initialArticles = allArticles.slice(0, 4);
 const additionalArticles = allArticles.slice(4);
 ---
 
 <section class="article">
-    <div class="article-header">
-        <Title title="Information" color="#88d498"/>
+	<div class="article-header">
+		<Title title="Information" color="#88d498" />
+	</div>
 
-    </div>
+	<ul class="article-list">
+		{
+			initialArticles.map((article) => (
+				<li class="article-item">
+					<a href={article.frontmatter.url}>
+						<div class="article-meta">
+							<ArticleCategory category={article.frontmatter.category} />
+							<time
+								class="article-date unbounded-bold"
+								datetime={article.frontmatter.date}
+							>
+								{article.frontmatter.date
+									.substring(0, 10)
+									.replace(/[-/]/g, '.')}
+							</time>
+						</div>
+						<p class="article-title">{article.frontmatter.title}</p>
+					</a>
+				</li>
+			))
+		}
+	</ul>
 
-    <ul class="article-list">
-        {initialArticles.map((article) => (
-        <li class="article-item">
-            <a href={article.frontmatter.url}>
-                <div class="article-meta">
-                    <ArticleCategory category={article.frontmatter.category} />
-                    <time class="article-date unbounded-bold" datetime={article.frontmatter.date}>{article.frontmatter.date.substring(0, 10).replace(/[-/]/g, '.')}</time>
-                </div>
-                <p class="article-title">{article.frontmatter.title}</p>
-            </a>
-        </li>
-        ))}
-    </ul>
+	{
+		additionalArticles.length > 0 && (
+			<div class="view-more-container">
+				<a href="#" class="view-more unbounded-regular" id="viewMore">
+					View More ↓
+				</a>
+			</div>
+		)
+	}
 
-    {additionalArticles.length > 0 && (
-    <div class="view-more-container">
-        <a href="#" class="view-more unbounded-regular" id="viewMore">View More ↓</a>
-    </div>
-    )}
-
-    <ul class="article-list additional-articles" id="additionalArticles" style="display: none;">
-        {additionalArticles.map((article) => (
-        <li class="article-item">
-            <a href={article.url}>
-                <div class="article-meta">
-                    <ArticleCategory category={article.frontmatter.category} />
-                    <time class="article-date unbounded-bold" datetime={article.frontmatter.date}>{article.frontmatter.date.substring(0, 10).replace(/[-/]/g, '.')}</time>
-                </div>
-                <p class="article-title">{article.frontmatter.title}</p>
-            </a>
-        </li>
-        ))}
-    </ul>
+	<ul
+		class="article-list additional-articles"
+		id="additionalArticles"
+		style="display: none;"
+	>
+		{
+			additionalArticles.map((article) => (
+				<li class="article-item">
+					<a href={article.url}>
+						<div class="article-meta">
+							<ArticleCategory category={article.frontmatter.category} />
+							<time
+								class="article-date unbounded-bold"
+								datetime={article.frontmatter.date}
+							>
+								{article.frontmatter.date
+									.substring(0, 10)
+									.replace(/[-/]/g, '.')}
+							</time>
+						</div>
+						<p class="article-title">{article.frontmatter.title}</p>
+					</a>
+				</li>
+			))
+		}
+	</ul>
 </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const viewMore = document.getElementById('viewMore');
-        const additionalArticles = document.getElementById('additionalArticles');
-        let isExpanded = false;
+	document.addEventListener('DOMContentLoaded', function () {
+		const viewMore = document.getElementById('viewMore');
+		const additionalArticles = document.getElementById('additionalArticles');
+		let isExpanded = false;
 
-        if (viewMore && additionalArticles) {
-            viewMore.addEventListener('click', function(e) {
-                e.preventDefault();
+		if (viewMore && additionalArticles) {
+			viewMore.addEventListener('click', function (e) {
+				e.preventDefault();
 
-                if (isExpanded) {
-                    viewMore.textContent = 'View More ↓';
-                    additionalArticles.style.display = 'none';
-                    isExpanded = false;
-                } else {
-                    viewMore.textContent = 'Close ↑';
-                    additionalArticles.style.display = 'block';
-                    isExpanded = true;
-                }
-            });
-        }
-    });
+				if (isExpanded) {
+					viewMore.textContent = 'View More ↓';
+					additionalArticles.style.display = 'none';
+					isExpanded = false;
+				} else {
+					viewMore.textContent = 'Close ↑';
+					additionalArticles.style.display = 'block';
+					isExpanded = true;
+				}
+			});
+		}
+	});
 </script>
 
 <style>
-.article {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 5rem 5rem 5rem 2rem;
-    background-color: #2c2c2c;
-}
+	.article {
+		max-width: 100%;
+		margin: 0 auto;
+		padding: 5rem 5rem 5rem 2rem;
+		background-color: #2c2c2c;
+	}
 
-.article-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    font-size: 2.5rem;
-    color: #97eca9bd;
-}
+	.article-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 2rem;
+		font-size: 2.5rem;
+		color: #97eca9bd;
+	}
 
-.view-more-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-    margin-left: 35%;
-}
+	.view-more-container {
+		display: flex;
+		justify-content: center;
+		margin-top: 2rem;
+		margin-left: 35%;
+	}
 
-.view-more {
-    color: #97eca9bd;
-    text-decoration: none;
-    font-size: 0.9rem;
-    padding: 0.8rem 1.5rem;
-    border-bottom: 1px solid #97eca9bd;
-    transition: all 0.3s ease;
-    text-align: center;
-    display: inline-block;
-    width: 160px;
-    box-sizing: border-box;
-}
+	.view-more {
+		color: #97eca9bd;
+		text-decoration: none;
+		font-size: 0.9rem;
+		padding: 0.8rem 1.5rem;
+		border-bottom: 1px solid #97eca9bd;
+		transition: all 0.3s ease;
+		text-align: center;
+		display: inline-block;
+		width: 160px;
+		box-sizing: border-box;
+	}
 
-.article-list {
-    list-style: none;
-    padding: 0;
-    margin-left: 35%;
-}
+	.article-list {
+		list-style: none;
+		padding: 0;
+		margin-left: 35%;
+	}
 
-.additional-articles {
-    margin-top: 0;
-    animation: slideDown 0.3s ease-in-out;
-}
+	.additional-articles {
+		margin-top: 0;
+		animation: slideDown 0.3s ease-in-out;
+	}
 
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+	@keyframes slideDown {
+		from {
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
 
-.article-item {
-    border-bottom: 1px solid #97eca955;
-}
+	.article-item {
+		border-bottom: 1px solid #97eca955;
+	}
 
-.article-item a {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-    padding: 0.8rem 0;
-    text-decoration: none;
-    color: inherit;
-    transition: background-color 0.3s;
-    min-width: 0;
-}
+	.article-item a {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.5rem;
+		padding: 0.8rem 0;
+		text-decoration: none;
+		color: inherit;
+		transition: background-color 0.3s;
+		min-width: 0;
+	}
 
-.article-meta {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 0.1rem;
-    flex: 1;
-    min-width: 0;
-}
+	.article-meta {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 0.1rem;
+		flex: 1;
+		min-width: 0;
+	}
 
-.article-date {
-    font-size: 0.8rem;
-    color: #69b87a;
-    display: flex;
-    padding-top: 0.35rem;
-}
+	.article-date {
+		font-size: 0.8rem;
+		color: #69b87a;
+		display: flex;
+		padding-top: 0.35rem;
+	}
 
-.unbounded-bold {
-    font-family: 'Unbounded Variable', sans-serif;
-    font-weight: bold;
-}
+	.unbounded-bold {
+		font-family: 'Unbounded Variable', sans-serif;
+		font-weight: bold;
+	}
 
-.unbounded-regular {
-    font-family: 'Unbounded Variable', sans-serif;
-    font-weight: 400;
-}
+	.unbounded-regular {
+		font-family: 'Unbounded Variable', sans-serif;
+		font-weight: 400;
+	}
 
-.article-title {
-    margin: 0;
-    color: #ffffffde;
-    font-size: 1.1em;
-    text-align: left;
-    width: 100%;
-    max-width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-family: 'hiragino-kaku-gothic-pron', sans-serif;
-}
+	.article-title {
+		margin: 0;
+		color: #ffffffde;
+		font-size: 1.1em;
+		text-align: left;
+		width: 100%;
+		max-width: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
+	}
 </style>
