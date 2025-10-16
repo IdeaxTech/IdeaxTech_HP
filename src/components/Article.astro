@@ -11,7 +11,7 @@ interface Article {
   };
 }
 interface Props {
-  articles: Article[];
+    articles: Article[];
 }
 const { articles: propsArticles } = Astro.props;
 const allArticles = propsArticles || (await Astro.glob('../articles/*.md') as Article[]).sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
@@ -195,5 +195,6 @@ const additionalArticles = allArticles.slice(4);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-family: 'hiragino-kaku-gothic-pron', sans-serif;
 }
 </style>
