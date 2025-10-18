@@ -1,8 +1,8 @@
 ---
+layout: '../layouts/PostLayout.astro'
 category: 'article-category1'
 date: '2025/08/10'
 title: '記事タイトルがここに入ります'
-layout: '../layouts/PostLayout.astro'
 ---
 
 #### こちらは記事1の本文です。
