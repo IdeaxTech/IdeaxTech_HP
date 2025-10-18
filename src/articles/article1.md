@@ -1,8 +1,8 @@
 ---
 category: 'article-category1'
-date: '2025/08/09'
+date: '2025/08/10'
 title: '記事タイトルがここに入ります'
-url: /articles/article1/
+layout: '../layouts/PostLayout.astro'
 ---
 
 #### こちらは記事1の本文です。

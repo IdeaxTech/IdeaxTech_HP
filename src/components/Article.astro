@@ -1,28 +1,24 @@
 ---
 import Title from './Title.astro';
 import ArticleCategory from './ArticleCategory.astro';
-import '@fontsource-variable/unbounded';
 interface Article {
 	frontmatter: {
 		category: string;
 		date: string;
 		title: string;
-		url: string;
+		layout: string;
 	};
 }
-interface Props {
-	articles: Article[];
-}
-const { articles: propsArticles } = Astro.props;
-const allArticles =
-	propsArticles ||
-	((await Astro.glob('../articles/*.md')) as Article[]).sort(
-		(a, b) =>
-			new Date(b.frontmatter.date).getTime() -
-			new Date(a.frontmatter.date).getTime(),
-	);
-const initialArticles = allArticles.slice(0, 4);
-const additionalArticles = allArticles.slice(4);
+const allArticles = ((await Astro.glob('../articles/*.md')) as Article[]).sort(
+	(a, b) => {
+		const dateA = new Date(a.frontmatter.date);
+		const dateB = new Date(b.frontmatter.date);
+		return dateB.getTime() - dateA.getTime();
+	},
+);
+const INITIAL_ARTICLES_COUNT = 4;
+const initialArticles = allArticles.slice(0, INITIAL_ARTICLES_COUNT);
+const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 ---
 
 <section class="article">
@@ -34,20 +30,16 @@ const additionalArticles = allArticles.slice(4);
 		{
 			initialArticles.map((article) => (
 				<li class="article-item">
-					<a href={article.frontmatter.url}>
-						<div class="article-meta">
-							<ArticleCategory category={article.frontmatter.category} />
-							<time
-								class="article-date unbounded-bold"
-								datetime={article.frontmatter.date}
-							>
-								{article.frontmatter.date
-									.substring(0, 10)
-									.replace(/[-/]/g, '.')}
-							</time>
-						</div>
-						<p class="article-title">{article.frontmatter.title}</p>
-					</a>
+					<div class="article-meta">
+						<ArticleCategory category={article.frontmatter.category} />
+						<time
+							class="article-date unbounded-bold"
+							datetime={article.frontmatter.date}
+						>
+							{article.frontmatter.date.substring(0, 10).replace(/[-/]/g, '.')}
+						</time>
+					</div>
+					<p class="article-title">{article.frontmatter.title}</p>
 				</li>
 			))
 		}
@@ -56,9 +48,9 @@ const additionalArticles = allArticles.slice(4);
 	{
 		additionalArticles.length > 0 && (
 			<div class="view-more-container">
-				<a href="#" class="view-more unbounded-regular" id="viewMore">
+				<button type="button" class="view-more unbounded-regular" id="viewMore">
 					View More ↓
-				</a>
+				</button>
 			</div>
 		)
 	}
@@ -71,20 +63,16 @@ const additionalArticles = allArticles.slice(4);
 		{
 			additionalArticles.map((article) => (
 				<li class="article-item">
-					<a href={article.url}>
-						<div class="article-meta">
-							<ArticleCategory category={article.frontmatter.category} />
-							<time
-								class="article-date unbounded-bold"
-								datetime={article.frontmatter.date}
-							>
-								{article.frontmatter.date
-									.substring(0, 10)
-									.replace(/[-/]/g, '.')}
-							</time>
-						</div>
-						<p class="article-title">{article.frontmatter.title}</p>
-					</a>
+					<div class="article-meta">
+						<ArticleCategory category={article.frontmatter.category} />
+						<time
+							class="article-date unbounded-bold"
+							datetime={article.frontmatter.date}
+						>
+							{article.frontmatter.date.substring(0, 10).replace(/[-/]/g, '.')}
+						</time>
+					</div>
+					<p class="article-title">{article.frontmatter.title}</p>
 				</li>
 			))
 		}
@@ -141,9 +129,11 @@ const additionalArticles = allArticles.slice(4);
 
 	.view-more {
 		color: #97eca9bd;
+		background-color: transparent;
 		text-decoration: none;
 		font-size: 0.9rem;
 		padding: 0.8rem 1.5rem;
+		border: none;
 		border-bottom: 1px solid #97eca9bd;
 		transition: all 0.3s ease;
 		text-align: center;
@@ -176,17 +166,8 @@ const additionalArticles = allArticles.slice(4);
 
 	.article-item {
 		border-bottom: 1px solid #97eca955;
-	}
-
-	.article-item a {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
 		gap: 0.5rem;
-		padding: 0.8rem 0;
-		text-decoration: none;
-		color: inherit;
-		transition: background-color 0.3s;
+		padding: 1rem 0;
 		min-width: 0;
 	}
 
@@ -195,8 +176,9 @@ const additionalArticles = allArticles.slice(4);
 		flex-direction: row;
 		align-items: flex-start;
 		gap: 0.1rem;
+		padding: 0.3rem 0;
 		flex: 1;
-		min-width: 0;
+		color: inherit;
 	}
 
 	.article-date {
