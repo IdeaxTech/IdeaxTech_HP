@@ -1,5 +1,5 @@
 ---
-layout: '../layouts/PostLayout.astro'
+layout: ../layouts/PostLayout.astro
 category: '記事－カテゴリ3'
 date: '2025/08/11'
 title: '記事タイトルがここに入ります。################################################################はみ出るくらい長い記事タイトルになります。'

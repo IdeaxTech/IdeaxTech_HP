@@ -1,5 +1,5 @@
 ---
-layout: '../layouts/PostLayout.astro'
+layout: ../layouts/PostLayout.astro
 category: ''
 date: '2024-09-05'
 title: '記事タイトルがここに入ります。'
