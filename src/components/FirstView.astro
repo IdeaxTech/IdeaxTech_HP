@@ -1,14 +1,15 @@
 ---
-import firstViewImage from '../assets/first-view.svg';
+import firstViewImage from '../assets/unity_header_with_glass.png';
 ---
 
 <section
 	class="first-view"
 	style={`background-image: url(${firstViewImage.src})`}
 >
-	<h1 class="first-view-title">
-		いったん、<br />つくってみる
-	</h1>
+	<p class="first-view-text">
+		いったん、<br />
+		つくってみる
+	</p>
 </section>
 
 <style>
@@ -24,13 +25,14 @@ import firstViewImage from '../assets/first-view.svg';
 		margin-bottom: 5rem;
 	}
 
-	.first-view-title {
+	.first-view-text {
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif !important;
 		position: absolute;
 		left: 4rem;
 		top: 33%;
 		font-size: 3.5rem;
 		color: #333333;
 		text-align: left;
-		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
+		font-weight: 600;
 	}
 </style>
