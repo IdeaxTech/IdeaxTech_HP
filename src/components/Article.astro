@@ -27,7 +27,6 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 	</div>
 
 	<div class="article-container">
-		<!-- Left column - Article detail -->
 		<div class="article-detail">
 			<time class="article-detail-date" id="selectedArticleDate"
 				>2025.07.15</time
@@ -42,7 +41,6 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 			</div>
 		</div>
 
-		<!-- Right column - Article list -->
 		<div class="article-list-container">
 			<ul class="article-list">
 				{
@@ -165,14 +163,14 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 
 	.article-detail-date {
 		display: block;
-		font-size: 20px;
+		font-size: 1.25rem;
 		margin-bottom: 1rem;
 		font-family: 'Unbounded Variable', sans-serif;
 		font-weight: bold;
 	}
 
 	.article-detail-title {
-		font-size: 40px;
+		font-size: 2.5rem;
 		border-bottom: 1px solid #97eca955;
 		padding-bottom: 1rem;
 		margin-bottom: 1rem;
@@ -184,13 +182,8 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 		line-height: 1.8;
 		color: #ffffffb3;
 		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
-		font-size: 24px;
+		font-size: 1.5rem;
 	}
-
-	.article-list-container {
-		/* Container for both lists */
-	}
-
 	.view-more-container {
 		display: flex;
 		justify-content: center;
