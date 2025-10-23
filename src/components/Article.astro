@@ -21,62 +21,90 @@ const initialArticles = allArticles.slice(0, INITIAL_ARTICLES_COUNT);
 const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 ---
 
-<section class="article">
+<section class="article-section">
 	<div class="article-header">
 		<Title title="Information" color="#88d498" />
 	</div>
 
-	<ul class="article-list">
-		{
-			initialArticles.map((article) => (
-				<li class="article-item">
-					<div class="article-meta">
-						<ArticleCategory category={article.frontmatter.category} />
-						<time
-							class="article-date unbounded-bold"
-							datetime={article.frontmatter.date}
-						>
-							{article.frontmatter.date.substring(0, 10).replace(/[-/]/g, '.')}
-						</time>
-					</div>
-					<p class="article-title">{article.frontmatter.title}</p>
-				</li>
-			))
-		}
-	</ul>
-
-	{
-		additionalArticles.length > 0 && (
-			<div class="view-more-container">
-				<button type="button" class="view-more unbounded-regular" id="viewMore">
-					View More ↓
-				</button>
+	<div class="article-container">
+		<!-- Left column - Article detail -->
+		<div class="article-detail">
+			<time class="article-detail-date" id="selectedArticleDate"
+				>2025.07.15</time
+			>
+			<h2 class="article-detail-title" id="selectedArticleTitle">
+				記事タイトルがここに入ります
+			</h2>
+			<div class="article-detail-body" id="selectedArticleBody">
+				<p>
+					記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります
+				</p>
 			</div>
-		)
-	}
+		</div>
 
-	<ul
-		class="article-list additional-articles"
-		id="additionalArticles"
-		style="display: none;"
-	>
-		{
-			additionalArticles.map((article) => (
-				<li class="article-item">
-					<div class="article-meta">
-						<ArticleCategory category={article.frontmatter.category} />
-						<time
-							class="article-date unbounded-bold"
-							datetime={article.frontmatter.date}
+		<!-- Right column - Article list -->
+		<div class="article-list-container">
+			<ul class="article-list">
+				{
+					initialArticles.map((article) => (
+						<li class="article-item">
+							<div class="article-meta">
+								<ArticleCategory category={article.frontmatter.category} />
+								<time
+									class="article-date unbounded-bold"
+									datetime={article.frontmatter.date}
+								>
+									{article.frontmatter.date
+										.substring(0, 10)
+										.replace(/[-/]/g, '.')}
+								</time>
+							</div>
+							<p class="article-title">{article.frontmatter.title}</p>
+						</li>
+					))
+				}
+			</ul>
+
+			{
+				additionalArticles.length > 0 && (
+					<div class="view-more-container">
+						<button
+							type="button"
+							class="view-more unbounded-regular"
+							id="viewMore"
 						>
-							{article.frontmatter.date.substring(0, 10).replace(/[-/]/g, '.')}
-						</time>
+							View More ↓
+						</button>
 					</div>
-					<p class="article-title">{article.frontmatter.title}</p>
-				</li>
-			))
-		}
-	</ul>
+				)
+			}
+
+			<ul
+				class="article-list additional-articles"
+				id="additionalArticles"
+				style="display: none;"
+			>
+				{
+					additionalArticles.map((article) => (
+						<li class="article-item">
+							<div class="article-meta">
+								<ArticleCategory category={article.frontmatter.category} />
+								<time
+									class="article-date unbounded-bold"
+									datetime={article.frontmatter.date}
+								>
+									{article.frontmatter.date
+										.substring(0, 10)
+										.replace(/[-/]/g, '.')}
+								</time>
+							</div>
+							<p class="article-title">{article.frontmatter.title}</p>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
 </section>
 
 <script>
@@ -104,10 +132,10 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 </script>
 
 <style>
-	.article {
+	.article-section {
 		max-width: 100%;
 		margin: 0 auto;
-		padding: 5rem 5rem 5rem 2rem;
+		padding: 5rem 2rem;
 		background-color: #2c2c2c;
 	}
 
@@ -116,15 +144,57 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 		justify-content: space-between;
 		align-items: center;
 		margin-bottom: 2rem;
+		max-width: 90%;
+		margin-left: auto;
+		margin-right: auto;
 		font-size: 2.5rem;
 		color: #97eca9bd;
+	}
+
+	.article-container {
+		display: grid;
+		grid-template-columns: 60% 40%;
+		gap: 5rem;
+		max-width: 90%;
+		margin: 0 auto;
+	}
+
+	.article-detail {
+		color: #ffffffde;
+	}
+
+	.article-detail-date {
+		display: block;
+		font-size: 20px;
+		margin-bottom: 1rem;
+		font-family: 'Unbounded Variable', sans-serif;
+		font-weight: bold;
+	}
+
+	.article-detail-title {
+		font-size: 40px;
+		border-bottom: 1px solid #97eca955;
+		padding-bottom: 1rem;
+		margin-bottom: 1rem;
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
+		font-weight: bold;
+	}
+
+	.article-detail-body {
+		line-height: 1.8;
+		color: #ffffffb3;
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
+		font-size: 24px;
+	}
+
+	.article-list-container {
+		/* Container for both lists */
 	}
 
 	.view-more-container {
 		display: flex;
 		justify-content: center;
 		margin-top: 2rem;
-		margin-left: 35%;
 	}
 
 	.view-more {
@@ -145,7 +215,7 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 	.article-list {
 		list-style: none;
 		padding: 0;
-		margin-left: 35%;
+		margin: 0;
 	}
 
 	.additional-articles {
@@ -169,6 +239,11 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 		gap: 0.5rem;
 		padding: 1rem 0;
 		min-width: 0;
+		cursor: pointer;
+		transition: background-color 0.2s;
+	}
+	.article-item:hover {
+		background-color: #ffffff0d;
 	}
 
 	.article-meta {
