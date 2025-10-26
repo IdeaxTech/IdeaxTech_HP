@@ -1,21 +1,14 @@
 ---
 import Title from './Title.astro';
 import ArticleCategory from './ArticleCategory.astro';
-interface Article {
-	frontmatter: {
-		category: string;
-		date: string;
-		title: string;
-		layout: string;
-	};
-}
-const allArticles = ((await Astro.glob('../articles/*.md')) as Article[]).sort(
-	(a, b) => {
-		const dateA = new Date(a.frontmatter.date);
-		const dateB = new Date(b.frontmatter.date);
-		return dateB.getTime() - dateA.getTime();
-	},
-);
+import ArticleDetail from './ArticleDetail.astro';
+
+const allArticles = (await Astro.glob('../articles/*.md')).sort((a, b) => {
+	const dateA = new Date(a.frontmatter.date);
+	const dateB = new Date(b.frontmatter.date);
+	return dateB.getTime() - dateA.getTime();
+});
+
 const INITIAL_ARTICLES_COUNT = 4;
 const initialArticles = allArticles.slice(0, INITIAL_ARTICLES_COUNT);
 const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
@@ -27,25 +20,25 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 	</div>
 
 	<div class="article-container">
-		<div class="article-detail">
-			<time class="article-detail-date" id="selectedArticleDate"
-				>2025.07.15</time
-			>
-			<h2 class="article-detail-title" id="selectedArticleTitle">
-				記事タイトルがここに入ります
-			</h2>
-			<div class="article-detail-body" id="selectedArticleBody">
-				<p>
-					記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります記事がここに入ります
-				</p>
-			</div>
+		<div id="articleDetailContainer">
+			{
+				allArticles.map((article, index) => (
+					<div
+						class="article-detail-wrapper"
+						id={`article-${index}`}
+						style={index === 0 ? 'display: block;' : 'display: none;'}
+					>
+						<ArticleDetail article={article} />
+					</div>
+				))
+			}
 		</div>
 
 		<div class="article-list-container">
 			<ul class="article-list">
 				{
-					initialArticles.map((article) => (
-						<li class="article-item">
+					initialArticles.map((article, index) => (
+						<li class="article-item" data-article-index={index}>
 							<div class="article-meta">
 								<ArticleCategory category={article.frontmatter.category} />
 								<time
@@ -83,8 +76,11 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 				style="display: none;"
 			>
 				{
-					additionalArticles.map((article) => (
-						<li class="article-item">
+					additionalArticles.map((article, index) => (
+						<li
+							class="article-item"
+							data-article-index={index + INITIAL_ARTICLES_COUNT}
+						>
 							<div class="article-meta">
 								<ArticleCategory category={article.frontmatter.category} />
 								<time
@@ -126,6 +122,25 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 				}
 			});
 		}
+
+		const articleItems = document.querySelectorAll('.article-item');
+		const articleWrappers = document.querySelectorAll(
+			'.article-detail-wrapper',
+		) as NodeListOf<HTMLElement>;
+
+		articleItems.forEach((item) => {
+			item.addEventListener('click', function (this: HTMLElement) {
+				const index = parseInt(this.dataset.articleIndex || '0');
+				articleWrappers.forEach((wrapper) => {
+					wrapper.style.display = 'none';
+				});
+
+				const selectedWrapper = document.getElementById(`article-${index}`);
+				if (selectedWrapper) {
+					selectedWrapper.style.display = 'block';
+				}
+			});
+		});
 	});
 </script>
 
@@ -157,33 +172,11 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 		margin: 0 auto;
 	}
 
-	.article-detail {
-		color: #ffffffde;
+	.article-detail-wrapper {
+		min-width: 0;
+		overflow: hidden;
 	}
 
-	.article-detail-date {
-		display: block;
-		font-size: 1.25rem;
-		margin-bottom: 1rem;
-		font-family: 'Unbounded Variable', sans-serif;
-		font-weight: bold;
-	}
-
-	.article-detail-title {
-		font-size: 2.5rem;
-		border-bottom: 1px solid #97eca955;
-		padding-bottom: 1rem;
-		margin-bottom: 1rem;
-		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
-		font-weight: bold;
-	}
-
-	.article-detail-body {
-		line-height: 1.8;
-		color: #ffffffb3;
-		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
-		font-size: 1.5rem;
-	}
 	.view-more-container {
 		display: flex;
 		justify-content: center;
@@ -203,6 +196,7 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 		display: inline-block;
 		width: 160px;
 		box-sizing: border-box;
+		cursor: pointer;
 	}
 
 	.article-list {
