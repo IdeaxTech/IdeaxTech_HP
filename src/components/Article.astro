@@ -3,11 +3,21 @@ import Title from './Title.astro';
 import ArticleCategory from './ArticleCategory.astro';
 import ArticleDetail from './ArticleDetail.astro';
 
-const allArticles = (await Astro.glob('../articles/*.md')).sort((a, b) => {
-	const dateA = new Date(a.frontmatter.date);
-	const dateB = new Date(b.frontmatter.date);
-	return dateB.getTime() - dateA.getTime();
-});
+interface Article {
+	frontmatter: {
+		category: string;
+		date: string;
+		title: string;
+		layout: string;
+	};
+}
+const allArticles = ((await Astro.glob('../articles/*.md')) as Article[]).sort(
+	(a, b) => {
+		const dateA = new Date(a.frontmatter.date);
+		const dateB = new Date(b.frontmatter.date);
+		return dateB.getTime() - dateA.getTime();
+	},
+);
 
 const INITIAL_ARTICLES_COUNT = 4;
 const initialArticles = allArticles.slice(0, INITIAL_ARTICLES_COUNT);
