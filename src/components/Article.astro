@@ -26,7 +26,7 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 
 <section class="article-section">
 	<div class="article-header">
-		<Title title="Information" color="#88d498" />
+		<Title title="Information" color="#59BA85" />
 	</div>
 
 	<div class="article-container">
@@ -156,9 +156,8 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 
 <style>
 	.article-section {
-		max-width: 100%;
-		margin: 0 auto;
-		padding: 5rem 2rem;
+		width: 100%;
+		min-height: 100vh;
 		background-color: #2c2c2c;
 	}
 
@@ -168,18 +167,26 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 		align-items: center;
 		margin-bottom: 2rem;
 		max-width: 90%;
-		margin-left: auto;
-		margin-right: auto;
 		font-size: 2.5rem;
-		color: #97eca9bd;
+		color: #59ba85;
 	}
 
 	.article-container {
-		display: grid;
-		grid-template-columns: 60% 40%;
-		gap: 5rem;
+		display: flex;
+		gap: 2rem;
 		max-width: 90%;
-		margin: 0 auto;
+		margin: 0 auto 4rem auto;
+	}
+
+	#articleDetailContainer {
+		flex: 3;
+		min-width: 0;
+		overflow: hidden;
+	}
+
+	.article-list-container {
+		flex: 2;
+		min-width: 0;
 	}
 
 	.article-detail-wrapper {
@@ -194,13 +201,13 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 	}
 
 	.view-more {
-		color: #97eca9bd;
+		color: #59ba85;
 		background-color: transparent;
 		text-decoration: none;
 		font-size: 0.9rem;
 		padding: 0.8rem 1.5rem;
 		border: none;
-		border-bottom: 1px solid #97eca9bd;
+		border-bottom: 1px solid #59ba85;
 		transition: all 0.3s ease;
 		text-align: center;
 		display: inline-block;
@@ -216,7 +223,7 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 	}
 
 	.additional-articles {
-		margin-top: 0;
+		margin-top: 2rem;
 		animation: slideDown 0.3s ease-in-out;
 	}
 
