@@ -1,10 +1,12 @@
 ---
 layout: ../layouts/PostLayout.astro
-category: 'article-category1'
-date: '2025/08/09'
-title: '記事タイトルがここに入ります'
+category: 'イベント'
+date: '2025/10/29'
+title: '名城大学大学祭の出展'
 ---
 
-#### こちらは記事1の本文です。
+#### キーボード制作体験を行います！
 
-This is the body of article 1.
+はんだ付け、キースイッチやキーキャップの選定も行います！
+ぜひ来てください！
+場所はN321です！
