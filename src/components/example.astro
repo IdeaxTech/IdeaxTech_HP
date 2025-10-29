@@ -50,6 +50,9 @@ const { img, title, text } = Astro.props;
 	}
 
 	.example-card-content {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
 		width: 100%;
 		max-width: 310px;
 		text-align: left;
@@ -57,15 +60,14 @@ const { img, title, text } = Astro.props;
 
 	.example-card-title {
 		margin: 0;
-		font-size: 1.8rem;
-		font-weight: 700;
+		font-size: 2rem;
+		font-weight: 600;
 		color: #ff3399;
 		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
 	}
 
 	.example-card-text {
-		min-height: 9em;
-		margin: 1rem 0;
+		margin: 0;
 		font-size: 1rem;
 		font-weight: 500;
 		color: #ff3399;
