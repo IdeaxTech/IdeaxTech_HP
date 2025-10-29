@@ -12,9 +12,19 @@ import Activities from '../components/Activities.astro';
 
 <Layout>
 	<Header />
-	<FirstView />
-	<Introduction />
-	<Activities />
-	<Article />
+	<div class="container">
+		<FirstView />
+		<Introduction />
+		<Activities />
+		<Article />
+	</div>
 	<Footer />
 </Layout>
+
+<style>
+	.container {
+		display: flex;
+		flex-direction: column;
+		gap: 7rem;
+	}
+</style>
