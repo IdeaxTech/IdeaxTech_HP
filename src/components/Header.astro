@@ -1,0 +1,78 @@
+---
+import logoImage from '../assets/IdeaxTech-header-logo.svg';
+---
+
+<header class="header">
+	<div class="logo">
+		<img src={logoImage.src} alt="IdeaxTech Logo" />
+	</div>
+	<nav class="nav unbounded-semibold">
+		<a href="#about">About</a>
+		<a href="#activities">Activities</a>
+		<a
+			href="https://forms.gle/oVYzsqC8A3L6Nqz98"
+			class="contact"
+			target="_blank"
+			rel="noopener noreferrer">Contact</a
+		>
+	</nav>
+</header>
+
+<style>
+	.header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #ffffff;
+		padding: 2rem;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	.logo {
+		margin-left: 15px;
+	}
+
+	.logo img {
+		max-width: 80%;
+		height: auto;
+	}
+
+	.nav {
+		display: flex;
+		gap: 2.5rem;
+	}
+
+	.unbounded-semibold {
+		font-family: 'Unbounded Variable', sans-serif;
+		font-weight: 600;
+		font-size: 1.25rem;
+	}
+
+	.nav a {
+		text-decoration: none;
+		color: #333333;
+		display: flex;
+		align-items: center;
+	}
+
+	.nav a:hover {
+		color: #000000;
+	}
+
+	.nav .contact {
+		background-color: #000000;
+		color: #ffffff;
+		padding: 14px 24px;
+		border-radius: 4px;
+	}
+
+	.nav .contact:hover {
+		background-color: #333333;
+		color: #ffffff;
+	}
+</style>

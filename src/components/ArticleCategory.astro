@@ -1,0 +1,21 @@
+---
+interface Props {
+	category?: string;
+}
+
+const { category } = Astro.props;
+---
+
+<span class="article-category">{category || 'カテゴリなし'}</span>
+
+<style>
+	.article-category {
+		background-color: #59ba85;
+		color: #2c2c2c;
+		font-size: 1rem;
+		padding: 0.3em 1.4rem;
+		border-radius: 1rem;
+		margin-right: 1rem;
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
+	}
+</style>

@@ -1,0 +1,83 @@
+---
+import mailIcon from '../assets/mail.svg';
+---
+
+<footer class="footer">
+	<div class="footer-content">
+		<div class="footer-content-left">
+			<div class="footer-content-left-social">
+				<p class="footer-content-left-title">Social</p>
+				<div class="footer-content-left-links">
+					<a href="mailto:ideaxtech0214+contact@gmail.com">
+						<img src={mailIcon.src} alt="Mail Icon" />Mail</a
+					>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-bottom">
+		<p>© Copyright</p>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		background-color: #fdfdfc;
+	}
+
+	.footer-content {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 80px 120px;
+	}
+
+	.footer-content-left {
+		flex: 1;
+		text-align: left;
+	}
+
+	.footer-content-left-social {
+		display: flex;
+		flex-direction: column;
+		gap: 40px;
+	}
+
+	.footer-content-left-title {
+		font-family: 'Unbounded Variable', sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 400;
+		font-style: normal;
+		font-size: 64px;
+		letter-spacing: 0.05em;
+	}
+
+	.footer-content-left-links {
+		display: flex;
+		flex-direction: row;
+		color: #000000;
+	}
+
+	.footer-content-left-links a {
+		font-family: Inner;
+		text-decoration: none;
+		color: #6e6e6e;
+		font-size: 18px;
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-weight: 600;
+		letter-spacing: -0.05em;
+	}
+
+	.footer-content-left-links a img {
+		width: 20px;
+		height: 20px;
+	}
+
+	.footer-bottom {
+		padding: 1px;
+		background-color: #e7e6e7;
+		text-align: center;
+	}
+</style>.

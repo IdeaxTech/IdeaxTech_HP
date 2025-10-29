@@ -1,0 +1,61 @@
+---
+import Title from './Title.astro';
+import Example from './example.astro';
+
+const activities = [
+	{
+		title: '## FastAPI勉強会',
+		image: '/public/FastAPI.svg',
+		text: '### Web開発で用いられるフレームワークであるFastAPIを通してAPI操作について学びました。他にも Unity、Git、Transformerといったテーマの勉強会をそれぞれの得意分野を生かしたメンバーが主体となって開催しています。',
+	},
+	{
+		title: '## キーボード作成',
+		image: '/public/keyboad.svg',
+		text: '### 回路設計から筐体制作まで多彩な工程を経て、オリジナルの自作キーボードを作成しています。不慣れなメンバーも互いに学び合いながら手を動かし、各々が完成を目指しています。',
+	},
+	{
+		title: '## 懇親会',
+		image: '/public/badminton.svg',
+		text: '### メンバー間の交流を促進するため、定期的に懇親会を企画・開催しています。例年5月には体育館を借りてバトミントン大会、12月には忘年会を行っています。',
+	},
+	{
+		title: '## もくもく会',
+		image: '/public/mokumoku.svg',
+		text: '### 毎週木曜日の午後にMStudio に集まって作業を進める「もくもく会」を開催しています。個人開発に取り組む人もいれば、授業の課題を進める人など、作業内容はさまざまで雑談をはさみながら各自作業を進めています。',
+	},
+	{
+		title: '## 伊勢ハッカソン',
+		image: '/public/ise.svg',
+		text: '### 年2回、メンバー限定ハッカソン「伊勢ハッカソン」を開催しています。伊勢にある関係者の別荘をお借りし、1泊2日の合宿形式で実施。メンターもIdeaxTech内のメンバーが務めています。',
+	},
+	{
+		title: '## HP制作',
+		image: '/public/hp.svg',
+		text: '### このホームページは、IdeaⅹTechのメンバーによって開発されました。デザイン班とエンジニア班にわかれ、毎週ミーティングを重ねながら計画を立て、タスクを分担して進めました。',
+	},
+];
+---
+
+<div id="activities">
+	<Title title="Activities" color="#E73197" />
+	<div class="activities-container">
+		{
+			activities.map((activity) => (
+				<Example
+					title={activity.title}
+					img={activity.image}
+					text={activity.text}
+				/>
+			))
+		}
+	</div>
+</div>
+
+<style>
+	.activities-container {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		margin: 0 auto;
+		align-items: stretch;
+	}
+</style>
