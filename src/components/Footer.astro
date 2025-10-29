@@ -6,10 +6,10 @@ import mailIcon from '../assets/mail.svg';
 	<div class="footer-content">
 		<div class="footer-content-left">
 			<div class="footer-content-left-social">
-				<h2 class="footer-content-left-title unbounded-300">Social</h2>
+				<span class="footer-content-left-title">Social</span>
 				<div class="footer-content-left-links">
 					<a href="mailto:ideaxtech0214+contact@gmail.com">
-						<img src={mailIcon.src} alt="Mail Icon" /> Mail</a
+						<img src={mailIcon.src} alt="Mail Icon" />Mail</a
 					>
 				</div>
 			</div>
@@ -21,13 +21,6 @@ import mailIcon from '../assets/mail.svg';
 </footer>
 
 <style>
-	.unbounded-300 {
-		font-family: 'Unbounded Variable', sans-serif;
-		font-optical-sizing: auto;
-		font-weight: 300;
-		font-style: normal;
-	}
-
 	.footer {
 		background-color: #fdfdfc;
 	}
@@ -36,7 +29,7 @@ import mailIcon from '../assets/mail.svg';
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 80px 120px;
+		padding: 160px 120px;
 	}
 
 	.footer-content-left {
@@ -47,11 +40,16 @@ import mailIcon from '../assets/mail.svg';
 	.footer-content-left-social {
 		display: flex;
 		flex-direction: column;
-		gap: 8px;
+		gap: 40px;
 	}
 
 	.footer-content-left-title {
+		font-family: 'Unbounded Variable', sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 400;
+		font-style: normal;
 		font-size: 64px;
+		letter-spacing: 0.05em;
 	}
 
 	.footer-content-left-links {
@@ -61,13 +59,15 @@ import mailIcon from '../assets/mail.svg';
 	}
 
 	.footer-content-left-links a {
+		font-family: Inner;
 		text-decoration: none;
-		margin-right: 20px;
-		color: #6f6f70;
+		color: #6e6e6e;
 		font-size: 18px;
 		display: flex;
 		align-items: center;
 		gap: 8px;
+		font-weight: 600;
+		letter-spacing: -0.05em;
 	}
 
 	.footer-content-left-links a img {
