@@ -1,0 +1,117 @@
+---
+const { article } = Astro.props;
+const { Content } = (await article) || { Content: null };
+---
+
+<article class="article-detail">
+	{
+		article && (
+			<>
+				<time class="article-detail-date" id="articleDetailDate">
+					{article.frontmatter.date.substring(0, 10).replace(/[-/]/g, '.')}
+				</time>
+				<h2 class="article-detail-title" id="articleDetailTitle">
+					{article.frontmatter.title}
+				</h2>
+				<div class="article-detail-body" id="articleContent">
+					{Content && (
+						<div class="post-content">
+							<Content />
+						</div>
+					)}
+				</div>
+			</>
+		)
+	}
+</article>
+
+<style>
+	.article-detail {
+		color: #ffffffde;
+	}
+
+	.article-detail-date {
+		display: block;
+		font-size: 1.25rem;
+		margin-bottom: 1rem;
+		font-family: 'Unbounded Variable', sans-serif;
+		font-weight: bold;
+	}
+
+	.article-detail-title {
+		font-size: 2.5rem;
+		border-bottom: 1px solid #97eca955;
+		padding-bottom: 1rem;
+		margin-bottom: 1rem;
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
+		font-weight: bold;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+		max-width: 100%;
+	}
+
+	.article-detail-body {
+		line-height: 1.8;
+		color: #ffffffb3;
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
+		font-size: 1.5rem;
+	}
+
+	.article-detail-body :global(h1),
+	.article-detail-body :global(h2),
+	.article-detail-body :global(h3),
+	.article-detail-body :global(h4),
+	.article-detail-body :global(h5),
+	.article-detail-body :global(h6) {
+		color: #ffffffde;
+		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
+		margin-top: 1.5em;
+		margin-bottom: 0.5em;
+	}
+
+	.article-detail-body :global(p) {
+		margin-bottom: 1em;
+	}
+
+	.article-detail-body :global(ul),
+	.article-detail-body :global(ol) {
+		margin-bottom: 1em;
+		padding-left: 2em;
+	}
+
+	.article-detail-body :global(code) {
+		background-color: #1a1a1a;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 0.9em;
+	}
+
+	.article-detail-body :global(pre) {
+		background-color: #1a1a1a;
+		padding: 1em;
+		border-radius: 5px;
+		overflow-x: auto;
+		margin-bottom: 1em;
+	}
+
+	.article-detail-body :global(pre code) {
+		background-color: transparent;
+		padding: 0;
+	}
+
+	.article-detail-body :global(.post-header) {
+		display: none;
+	}
+
+	.article-detail-body :global(.post) {
+		background: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.article-detail-body :global(.post-content) {
+		background: none;
+		padding: 0;
+		margin: 0;
+	}
+</style>

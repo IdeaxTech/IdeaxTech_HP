@@ -1,6 +1,8 @@
 ---
 import Title from './Title.astro';
 import ArticleCategory from './ArticleCategory.astro';
+import ArticleDetail from './ArticleDetail.astro';
+
 interface Article {
 	frontmatter: {
 		category: string;
@@ -16,67 +18,97 @@ const allArticles = ((await Astro.glob('../articles/*.md')) as Article[]).sort(
 		return dateB.getTime() - dateA.getTime();
 	},
 );
+
 const INITIAL_ARTICLES_COUNT = 4;
 const initialArticles = allArticles.slice(0, INITIAL_ARTICLES_COUNT);
 const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 ---
 
-<section class="article">
+<section class="article-section">
 	<div class="article-header">
-		<Title title="Information" color="#88d498" />
+		<Title title="Information" color="#59BA85" />
 	</div>
 
-	<ul class="article-list">
-		{
-			initialArticles.map((article) => (
-				<li class="article-item">
-					<div class="article-meta">
-						<ArticleCategory category={article.frontmatter.category} />
-						<time
-							class="article-date unbounded-bold"
-							datetime={article.frontmatter.date}
-						>
-							{article.frontmatter.date.substring(0, 10).replace(/[-/]/g, '.')}
-						</time>
+	<div class="article-container">
+		<div id="articleDetailContainer">
+			{
+				allArticles.map((article, index) => (
+					<div
+						class="article-detail-wrapper"
+						id={`article-${index}`}
+						style={index === 0 ? 'display: block;' : 'display: none;'}
+					>
+						<ArticleDetail article={article} />
 					</div>
-					<p class="article-title">{article.frontmatter.title}</p>
-				</li>
-			))
-		}
-	</ul>
+				))
+			}
+		</div>
 
-	{
-		additionalArticles.length > 0 && (
-			<div class="view-more-container">
-				<button type="button" class="view-more unbounded-regular" id="viewMore">
-					View More ↓
-				</button>
-			</div>
-		)
-	}
+		<div class="article-list-container">
+			<ul class="article-list">
+				{
+					initialArticles.map((article, index) => (
+						<li class="article-item" data-article-index={index}>
+							<div class="article-meta">
+								<ArticleCategory category={article.frontmatter.category} />
+								<time
+									class="article-date unbounded-bold"
+									datetime={article.frontmatter.date}
+								>
+									{article.frontmatter.date
+										.substring(0, 10)
+										.replace(/[-/]/g, '.')}
+								</time>
+							</div>
+							<p class="article-title">{article.frontmatter.title}</p>
+						</li>
+					))
+				}
+			</ul>
 
-	<ul
-		class="article-list additional-articles"
-		id="additionalArticles"
-		style="display: none;"
-	>
-		{
-			additionalArticles.map((article) => (
-				<li class="article-item">
-					<div class="article-meta">
-						<ArticleCategory category={article.frontmatter.category} />
-						<time
-							class="article-date unbounded-bold"
-							datetime={article.frontmatter.date}
+			{
+				additionalArticles.length > 0 && (
+					<div class="view-more-container">
+						<button
+							type="button"
+							class="view-more unbounded-regular"
+							id="viewMore"
 						>
-							{article.frontmatter.date.substring(0, 10).replace(/[-/]/g, '.')}
-						</time>
+							View More ↓
+						</button>
 					</div>
-					<p class="article-title">{article.frontmatter.title}</p>
-				</li>
-			))
-		}
-	</ul>
+				)
+			}
+
+			<ul
+				class="article-list additional-articles"
+				id="additionalArticles"
+				style="display: none;"
+			>
+				{
+					additionalArticles.map((article, index) => (
+						<li
+							class="article-item"
+							data-article-index={index + INITIAL_ARTICLES_COUNT}
+						>
+							<div class="article-meta">
+								<ArticleCategory category={article.frontmatter.category} />
+								<time
+									class="article-date unbounded-bold"
+									datetime={article.frontmatter.date}
+								>
+									{article.frontmatter.date
+										.substring(0, 10)
+										.replace(/[-/]/g, '.')}
+								</time>
+							</div>
+							<p class="article-title">{article.frontmatter.title}</p>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
 </section>
 
 <script>
@@ -100,14 +132,32 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 				}
 			});
 		}
+
+		const articleItems = document.querySelectorAll('.article-item');
+		const articleWrappers = document.querySelectorAll(
+			'.article-detail-wrapper',
+		) as NodeListOf<HTMLElement>;
+
+		articleItems.forEach((item) => {
+			item.addEventListener('click', function (this: HTMLElement) {
+				const index = parseInt(this.dataset.articleIndex || '0');
+				articleWrappers.forEach((wrapper) => {
+					wrapper.style.display = 'none';
+				});
+
+				const selectedWrapper = document.getElementById(`article-${index}`);
+				if (selectedWrapper) {
+					selectedWrapper.style.display = 'block';
+				}
+			});
+		});
 	});
 </script>
 
 <style>
-	.article {
-		max-width: 100%;
-		margin: 0 auto;
-		padding: 5rem 5rem 5rem 2rem;
+	.article-section {
+		width: 100%;
+		min-height: 100vh;
 		background-color: #2c2c2c;
 	}
 
@@ -116,40 +166,64 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 		justify-content: space-between;
 		align-items: center;
 		margin-bottom: 2rem;
+		max-width: 90%;
 		font-size: 2.5rem;
-		color: #97eca9bd;
+		color: #59ba85;
+	}
+
+	.article-container {
+		display: flex;
+		gap: 2rem;
+		max-width: 90%;
+		margin: 0 auto 4rem auto;
+	}
+
+	#articleDetailContainer {
+		flex: 3;
+		min-width: 0;
+		overflow: hidden;
+	}
+
+	.article-list-container {
+		flex: 2;
+		min-width: 0;
+	}
+
+	.article-detail-wrapper {
+		min-width: 0;
+		overflow: hidden;
 	}
 
 	.view-more-container {
 		display: flex;
 		justify-content: center;
 		margin-top: 2rem;
-		margin-left: 35%;
 	}
 
 	.view-more {
-		color: #97eca9bd;
+		color: #59ba85;
 		background-color: transparent;
 		text-decoration: none;
 		font-size: 0.9rem;
 		padding: 0.8rem 1.5rem;
 		border: none;
-		border-bottom: 1px solid #97eca9bd;
+		border-bottom: 1px solid #59ba85;
 		transition: all 0.3s ease;
 		text-align: center;
 		display: inline-block;
 		width: 160px;
 		box-sizing: border-box;
+		cursor: pointer;
 	}
 
 	.article-list {
 		list-style: none;
 		padding: 0;
-		margin-left: 35%;
+		margin: 0;
 	}
 
 	.additional-articles {
-		margin-top: 0;
+		margin-top: 2rem;
 		animation: slideDown 0.3s ease-in-out;
 	}
 
@@ -169,6 +243,11 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 		gap: 0.5rem;
 		padding: 1rem 0;
 		min-width: 0;
+		cursor: pointer;
+		transition: background-color 0.2s;
+	}
+	.article-item:hover {
+		background-color: #ffffff0d;
 	}
 
 	.article-meta {
@@ -189,6 +268,7 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 	}
 
 	.unbounded-bold {
+		font-size: 1rem;
 		font-family: 'Unbounded Variable', sans-serif;
 		font-weight: bold;
 	}
@@ -201,7 +281,7 @@ const additionalArticles = allArticles.slice(INITIAL_ARTICLES_COUNT);
 	.article-title {
 		margin: 0;
 		color: #ffffffde;
-		font-size: 1.1em;
+		font-size: 1.5rem;
 		text-align: left;
 		width: 100%;
 		max-width: 100%;
