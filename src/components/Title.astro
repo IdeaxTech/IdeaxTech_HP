@@ -18,17 +18,23 @@ const { title, color } = Astro.props as Props;
 const titleColor = color ? color : '#333333';
 ---
 
-<h2 class="title">#{title}</h2>
+<div class="title-container">
+	<h2 class="title">#{title}</h2>
 
-<style define:vars={{ titleColor }}>
-	.title {
-		font-family: 'Unbounded Variable', sans-serif;
-		font-size: 64px;
-		margin-top: 32px;
-		margin-bottom: 64px;
-		margin-left: 120px;
+	<style define:vars={{ titleColor }}>
+		.title-container {
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			margin-left: 120px;
+		}
+		.title {
+			font-family: 'Unbounded Variable', sans-serif;
+			font-size: 64px;
+			font-weight: 600;
 
-		/* デフォルトを適用済みの CSS 変数を使用 */
-		color: var(--titleColor);
-	}
-</style>
+			/* デフォルトを適用済みの CSS 変数を使用 */
+			color: var(--titleColor);
+		}
+	</style>
+</div>
