@@ -74,4 +74,61 @@ const { img, title, text } = Astro.props;
 		line-height: 1.5;
 		font-family: 'hiragino-kaku-gothic-pron', sans-serif;
 	}
+	/* タブレット対応 */
+	@media (max-width: 1024px) {
+		.example-card {
+			padding: 1.5rem;
+			align-items: start;
+			justify-content: start;
+		}
+
+		.example-card-inner {
+			gap: 24px;
+		}
+
+		.example-card-image-wrapper {
+			max-width: 220px;
+		}
+
+		.example-card-content {
+			max-width: 230px;
+		}
+
+		.example-card-title {
+			font-size: 1.2rem;
+		}
+
+		.example-card-text {
+			font-size: 0.75rem;
+		}
+	}
+
+	/* モバイル対応 */
+	@media (max-width: 768px) {
+		.example-card {
+			padding: 1rem;
+			align-items: start;
+			justify-content: start;
+		}
+
+		.example-card-inner {
+			gap: 16px;
+		}
+
+		.example-card-image-wrapper {
+			max-width: 150px;
+		}
+
+		.example-card-content {
+			max-width: 150px;
+		}
+
+		.example-card-title {
+			font-size: 1rem;
+		}
+
+		.example-card-text {
+			font-size: 0.625rem;
+		}
+	}
 </style>
