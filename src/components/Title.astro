@@ -28,6 +28,7 @@ const titleColor = color ? color : '#333333';
 			align-items: center;
 			margin-left: 120px;
 		}
+
 		.title {
 			font-family: 'Unbounded Variable', sans-serif;
 			font-size: 64px;
@@ -35,6 +36,24 @@ const titleColor = color ? color : '#333333';
 
 			/* デフォルトを適用済みの CSS 変数を使用 */
 			color: var(--titleColor);
+		}
+
+		@media (max-width: 768px) {
+			.title-container {
+				margin-left: 20px;
+			}
+
+			.title {
+				font-size: 32px;
+			}
+		}
+		@media (min-width: 769px) and (max-width: 1024px) {
+			.title-container {
+				margin-left: 60px;
+			}
+			.title {
+				font-size: 48px;
+			}
 		}
 	</style>
 </div>
