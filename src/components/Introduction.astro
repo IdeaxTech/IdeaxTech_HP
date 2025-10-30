@@ -107,4 +107,65 @@ import logoImage from '../assets/IdeaTech_logo.svg';
 		object-fit: contain;
 		max-width: 40%;
 	}
+	/* タブレット対応 */
+	@media (max-width: 1024px) {
+		.introduction {
+			gap: 60px;
+		}
+
+		.title {
+			font-size: 64px;
+		}
+
+		.introductionWrapper {
+			gap: 24px;
+		}
+
+		.h2 {
+			font-size: 20px;
+		}
+
+		.text {
+			font-size: 14px;
+			line-height: 28px;
+			margin-bottom: 24px;
+		}
+
+		.button {
+			width: 200px;
+			height: 30px;
+			font-size: 14px;
+		}
+	}
+
+	/* モバイル対応 */
+	@media (max-width: 768px) {
+		.introduction {
+			gap: 40px;
+		}
+
+		.title {
+			font-size: 48px;
+		}
+
+		.introductionWrapper {
+			gap: 16px;
+		}
+
+		.h2 {
+			font-size: 18px;
+		}
+
+		.text {
+			font-size: 12px;
+			line-height: 24px;
+			margin-bottom: 16px;
+		}
+
+		.button {
+			width: 180px;
+			height: 28px;
+			font-size: 12px;
+		}
+	}
 </style>
