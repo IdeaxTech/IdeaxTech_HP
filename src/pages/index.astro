@@ -25,6 +25,16 @@ import Activities from '../components/Activities.astro';
 	.container {
 		display: flex;
 		flex-direction: column;
-		gap: 7rem;
+		gap: 6rem;
+	}
+	@media (max-width: 1024px) {
+		.container {
+			gap: 4rem;
+		}
+	}
+	@media (max-width: 768px) {
+		.container {
+			gap: 3rem;
+		}
 	}
 </style>
