@@ -1,50 +1,92 @@
 # IdeaxTech_HP
 
-# Astro Starter Kit: Basics
+IdeaxTech のコーポレート／技術ブログサイトを構築・運用するためのリポジトリです。
 
-```sh
-npm create astro@latest -- --template basics
+---
+
+## 🚀 環境構築
+
+### 手順
+
+#### 1. リポジトリをクローン
+
+```bash
+git clone https://github.com/IdeaxTech/IdeaxTech_HP.git
+cd IdeaxTech_HP
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```bash
+npm install
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+```bash
+npm run dev
+```
 
-## 🧞 Commands
+# 📂 ディレクトリ構成
 
-All commands are run from the root of the project, from a terminal:
+```
+src/
+├── articles/        # ブログ記事（Markdown ファイル）
+│   ├── article1.md
+├── assets/          # サイトで使用する静的アセット（画像など）
+├── components/      # UI コンポーネント (.astro)
+├── layouts/         # ページレイアウト (.astro)
+│   ├── Layout.astro
+│   └── PostLayout.astro
+└── pages/           # ページ（例: index.astro）
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+public/              # ビルド後にそのまま配信される静的ファイル
+```
 
-## 👀 Want to learn more?
+## ✍️ 記事の編集方法
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+このリポジトリでは記事を Markdown ファイル（`src/articles/`）として管理します。
+
+### 記事の新規作成
+
+- ファイルを `src/articles/` に作成し、下記のようなYAML frontmatter を記述します。
+
+例: `src/articles/my-new-article.md`
+
+```yaml
+---
+layout: ../layouts/PostLayout.astro
+category: 'イベント'
+date: '2025/10/29'
+title: 'テスト'
+---
+本文をここに書きます。
+```
+
+編集が終わったら、下記のコマンドを実行してプレビューします。
+
+```bat
+npm run dev
+```
+
+### 不要な記事を削除
+
+- 不要になった記事ファイルを `src/articles/` から削除します。
+
+### 画像・アセットについて
+
+- 記事で使う画像は `src/assets/` に置きます。
+
+### コミットする時の注意点
+
+Git Actionsでコードの整形チェックを実行しているので、ローカル環境で確認してからコミットするようにしてください。
+
+**チェック**
+
+```bash
+npx prettier . --check
+```
+
+**自動修正**
+
+```bash
+npx prettier . --write
+```
+
+---
